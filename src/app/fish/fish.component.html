@@ -1,0 +1,220 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+<body>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="col-sm-12 text-center">
+            <div class="input-group mt-5">
+                <input class="form-control" type="text" #userInput placeholder="Enter city name">
+                <br>
+                <br>
+                <br>
+                <select [(ngModel)]="value" >
+                    <option *ngFor="let prawn of prawns" value="{{prawn.value}}">{{prawn.name}}</option>
+                </select><br>
+                <br>
+                <div class="input-group-append">
+                    <button class="input-group-text btn btn-primary" (click)="getCity(userInput.value)">Search</button> 
+                </div>
+                <br>
+                <br>
+            <div *ngIf="isClicked">
+            <h5 style="color:blanchedalmond;">Current Weather Forecasting in your city..</h5>
+            <h2 style="color:blanchedalmond;"><b> Weather in {{ weather.name }}, {{ weather.sys.country }}</b></h2>
+            <div class="col-sm-12">
+                <p class="text-uppercase font-italic font-weight-bold" style="color:blanchedalmond;"><b>{{ weather.weather[0].description }}</b></p>
+            </div>
+            </div>
+            </div>
+        <div *ngIf="isClicked">
+            <div class="col-sm-12">
+                <span style="color:blanchedalmond;" class="temp">
+                    {{ weather.main.temp }}&#176;F</span>
+            </div>
+        <table class="table table-light table-stripped table-bordered table-sm"> 
+            <tbody>
+                <tr class="success">
+                    <td>Temperature</td><td>{{ weather.main.temp }}&#176;F</td>
+                </tr>
+                <tr class="danger">
+                    <td>Humidity</td><td>{{ weather.main.humidity }}%</td>
+                </tr>
+                <tr class="info">
+                    <td>Pressure</td><td>{{ weather.main.pressure }}HPA</td>
+                </tr>
+                <tr class="warning">
+                    <td>Sunrise</td><td>{{ weather.sys.sunrise * 1000 | date:'H:mm' }}</td>
+                </tr>
+                <tr class="active">
+                    <td>Sunset</td><td>{{ weather.sys.sunset * 1000 | date:'H:mm' }}</td>
+                </tr>
+                <tr class="success">
+                    <td>Geo Coords</td><td>[{{ weather.coord.lat }}, {{weather.coord.lon}}]</td>
+                </tr>
+                <tr class="danger">
+                    <td>min Temperature</td><td>{{ weather.main.temp_min }}&#176;F</td>
+                </tr>
+                <tr class="info">
+                    <td>max Temperature</td><td>{{ weather.main.temp_max }}&#176;F</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="value === 'atlsalmon'" style="background-color: gray; color: blanchedalmond;" >
+            <br>
+            <br>
+            <br>
+            <br>
+            <div *ngIf = "weather.main.temp >= 59 && weather.main.temp <= 67"><h2>Your Pond's Temperature is Perfect</h2>
+            <h3 *ngIf = "weather.main.temp_min <= 59"> But there is a chance of over cooling of your pond.<br> Take necessary measures</h3>
+            <h3 *ngIf = "weather.main.temp_max >= 67"> But there is a chance of over heating of your pond.<br> Take necessary measures</h3>
+            </div>
+            <div *ngIf = "!(weather.main.temp >= 59 && weather.main.temp <= 67)">
+            <h2 *ngIf = "weather.main.temp <= 59">Temperature of your pond is less than the optimum Temperature<br>
+                <h3>Take necessary measures to reduce the effect</h3></h2>
+            <h2 *ngIf = "weather.main.temp >= 67">Temperature of your pond is greater than the optimum Temperature<br>
+                <h3>Take necessary measures to reduce the effect</h3></h2>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div *ngIf="value === 'browntrout'" style="background-color: gray; color: blanchedalmond;" >
+            <br>
+            <br>
+            <br>
+            <br>
+            <div *ngIf = "weather.main.temp >= 44.6 && weather.main.temp <= 67"><h2>Your Pond's Temperature is Perfect</h2>
+            <h3 *ngIf = "weather.main.temp_min <= 44.6"> But there is a chance of over cooling of your pond.<br> Take necessary measures</h3>
+            <h3 *ngIf = "weather.main.temp_max >= 67"> But there is a chance of over heating of your pond.<br> Take necessary measures</h3>
+            </div>
+            <div *ngIf = "!(weather.main.temp >= 44.6 && weather.main.temp <= 67)">
+                <h2 *ngIf = "weather.main.temp <= 44.6">Temperature of your pond is less than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+                <h2 *ngIf = "weather.main.temp >= 67">Temperature of your pond is greater than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div *ngIf="value === 'hybridcatfish1'" style="background-color: gray; color: blanchedalmond;" >
+            <br>
+            <br>
+            <br>
+            <br>
+            <div *ngIf = "weather.main.temp >= 75 && weather.main.temp <= 95"><h2>Your Pond's Temperature is Perfect</h2>
+            <h3 *ngIf = "weather.main.temp_min <= 75"> But there is a chance of over cooling of your pond.<br> Take necessary measures</h3>
+            <h3 *ngIf = "weather.main.temp_max >= 95"> But there is a chance of over heating of your pond.<br> Take necessary measures</h3>
+            </div>
+            <div *ngIf = "!(weather.main.temp >= 75 && weather.main.temp <= 95)">
+                <h2 *ngIf = "weather.main.temp <= 75">Temperature of your pond is less than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+                <h2 *ngIf = "weather.main.temp >= 95">Temperature of your pond is greater than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div> 
+        <div *ngIf="value === 'hybridcatfish2'" style="background-color: gray; color: blanchedalmond;" >
+            <br>
+            <br>
+            <br>
+            <br>
+            <div *ngIf = "weather.main.temp >= 69.8 && weather.main.temp <= 85"><h2>Your Pond's Temperature is Perfect</h2>
+            <h3 *ngIf = "weather.main.temp_min <= 69.8"> But there is a chance of over cooling of your pond.<br> Take necessary measures</h3>
+            <h3 *ngIf = "weather.main.temp_max >= 85"> But there is a chance of over heating of your pond.<br> Take necessary measures</h3>
+            </div>
+            <div *ngIf = "!(weather.main.temp >= 69.8 && weather.main.temp <= 85)">
+                <h2 *ngIf = "weather.main.temp <= 69.8">Temperature of your pond is less than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+                <h2 *ngIf = "weather.main.temp >= 85">Temperature of your pond is greater than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div *ngIf="value === 'channelcatfish'" style="background-color: gray; color: blanchedalmond;" >
+            <br>
+            <br>
+            <br>
+            <br>
+            <div *ngIf = "weather.main.temp >= 80 && weather.main.temp <= 87"><h2>Your Pond's Temperature is Perfect</h2>
+            <h3 *ngIf = "weather.main.temp_min <= 80"> But there is a chance of over cooling of your pond.<br> Take necessary measures</h3>
+            <h3 *ngIf = "weather.main.temp_max >= 87"> But there is a chance of over heating of your pond.<br> Take necessary measures</h3>
+            </div>
+            <div *ngIf = "!(weather.main.temp >= 80 && weather.main.temp <= 87)">
+                <h2 *ngIf = "weather.main.temp <= 80">Temperature of your pond is less than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+                <h2 *ngIf = "weather.main.temp >= 87">Temperature of your pond is greater than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div *ngIf="value === 'catfish'" style="background-color: gray; color: blanchedalmond;" >
+            <br>
+            <br>
+            <br>
+            <br>
+            <div *ngIf = "weather.main.temp >= 77 && weather.main.temp <= 92"><h2>Your Pond's Temperature is Perfect</h2>
+            <h3 *ngIf = "weather.main.temp_min <= 77"> But there is a chance of over cooling of your pond.<br> Take necessary measures</h3>
+            <h3 *ngIf = "weather.main.temp_max >= 92"> But there is a chance of over heating of your pond.<br> Take necessary measures</h3>
+            </div>
+            <div *ngIf = "!(weather.main.temp >= 77 && weather.main.temp <= 92)">
+                <h2 *ngIf = "weather.main.temp <= 77">Temperature of your pond is less than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+                <h2 *ngIf = "weather.main.temp >= 92">Temperature of your pond is greater than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div> 
+        <div *ngIf="value === 'bluecatfish'" style="background-color: gray; color: blanchedalmond;" >
+            <br>
+            <br>
+            <br>
+            <br>
+            <div *ngIf = "weather.main.temp >= 70 && weather.main.temp <= 84"><h2>Your Pond's Temperature is Perfect</h2>
+            <h3 *ngIf = "weather.main.temp_min <= 70"> But there is a chance of over cooling of your pond.<br> Take necessary measures</h3>
+            <h3 *ngIf = "weather.main.temp_max >= 84"> But there is a chance of over heating of your pond.<br> Take necessary measures</h3>
+            </div>
+            <div *ngIf = "!(weather.main.temp >= 70 && weather.main.temp <= 84)">
+                <h2 *ngIf = "weather.main.temp <= 70">Temperature of your pond is less than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+                <h2 *ngIf = "weather.main.temp >= 84">Temperature of your pond is greater than the optimum Temperature<br>
+                    <h3>Take necessary measures to reduce the effect</h3></h2>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div> 
+            
+    
+    </div>
+    </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
